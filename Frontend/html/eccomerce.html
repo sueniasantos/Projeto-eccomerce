@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneakers</title>
+    <!--Favicon-->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/Frontend/images/favicon-32x32.png"
+    />
+    <!--Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!--CSS-->
+    <link rel="stylesheet" href="/Frontend/css/componentes/header.css" />
+    <link rel="stylesheet" href="/Frontend/css/componentes/main.css" />
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!--header-->
+      <header>
+        <nav class="navbar navbar-expand-lg">
+          <div class="container px-0">
+            <a class="navbar-brand" href="#">
+              <img src="/Frontend/images/logo.svg" alt="Logo sneakers"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
+                <li class="nav-item ">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Coleções</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Homens</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Mulheres</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Informações</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contato</a>
+                </li>
+              </ul>
+              <div class="d-flex align-items-center">
+                <div class="px-4">
+                  <button class="cart-btn-header" onclick="openCart()">
+                    <a href="#">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="20"
+                      >
+                        <path
+                          id="cart-icon-header"
+                          d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                          fill="#69707D"
+                          fill-rule="nonzero"
+                        />
+                      </svg>
+                      <span class="active-products">0</span>
+                    </a>
+                  </button>
+                </div>
+                <div class="cart-perfil">
+                  <a href="#">
+                    <img
+                      src="/Frontend/images/image-avatar.png"
+                      alt="usuário avatar"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="cart-pop-up p-3">
+          <h2>Carrinho</h2>
+          <hr />
+          <div class="cart-pop-up-desc d-flex">
+            <div class="cart-products d-flex align-items-center">
+              <div class="cart-product">
+                <a href="#">
+                  <img
+                    src="/Frontend/images/image-product-1-thumbnail.jpg"
+                    alt="sneakers"
+                  />
+                </a>
+              </div>
+              <div class="cart-products-infor mx-2">
+                <p>
+                  tênis de edição limitada outono
+                  <br />
+                  <small class="price">
+                    R$
+                    <span>125.00</span>
+                  </small>
+                  x
+                  <small class="quantity" id="exibe"></small>
+                  <small class="total">
+                    R$
+                    <span id="total">0,00<span>
+                  </small>
+                </p>
+              </div>
+              <div class="cart-products-delete">
+                <button class="delete-btn" onClick="destroy()">
+                  <img src="/Frontend/images/icon-delete.svg" alt="delete" />
+                </button>
+              </div>
+            </div>
+            <button id="check-out">Comprar</button>
+          </div>
+          <div class="empty-cart">Seu carrinho está vazio.</div>
+        </div>
+      </header>
+      <!--main body-->
+      <main>
+        <div class="products w-100 d-flex justify-content-center py-5">
+          <div class="products-showcase">
+            <div class="products-slider-image">
+              <div
+                class="products-slider-image-main d-flex"
+                onclick="openCarousel()"
+              >
+                <img
+                  src="/Frontend/images/image-product-1.jpg"
+                  alt="sneakers1"
+                  class="img-fluid slide replace"
+                />
+              </div>
+            </div>
+            <div
+              class="
+                products-slider-navigation
+                py-4
+                d-flex
+                justify-content-between
+              "
+            >
+              <div class="thumbnails" onclick="selectedImgOne()">
+                <img
+                  src="/Frontend/images/image-product-1-thumbnail.jpg"
+                  alt="sneakers"
+                  class="img-fluid"
+                />
+                <div class="overlay" id="one"></div>
+              </div>
+              <div class="thumbnails" onclick="selectedImgTwo()">
+                <img
+                  src="/Frontend/images/image-product-2-thumbnail.jpg"
+                  alt="sneakers"
+                  class="img-fluid"
+                />
+                <div id="two"></div>
+              </div>
+              <div class="thumbnails" onclick="selectedImgThree()">
+                <img
+                  src="/Frontend/images/image-product-3-thumbnail.jpg"
+                  alt="sneakers"
+                  class="img-fluid"
+                />
+                <div id="three"></div>
+              </div>
+              <div class="thumbnails" onclick="selectedImgFour()">
+                <img
+                  src="/Frontend/images/image-product-4-thumbnail.jpg"
+                  alt="sneakers"
+                  class="img-fluid"
+                />
+                <div id="four"></div>
+              </div>
+            </div>
+          </div>
+          <div class="infor-container py-5">
+            <div class="products-infor">
+              <span class="products-infor-small">TÊNIS CAMPANHA</span>
+              <h2 class="products-infor-title py-2 nomeprod" id="nome1">
+                Tênis Edição Limitada de Outono
+              </h2>
+              <p>
+                Esse tênis de baixo perfil são a companhia perfeita para o
+                desgaste do dia a dia. Apresentando uma sola externa de borracha
+                durável, ele suporta tudo que o clima pode oferecer.
+              </p>
+              <div class="products-infor-price py-2">
+                <div class="d-flex align-items-center">
+                  <h3>
+                    R$
+                    <span id="preco1" class="preco">125,00</span>
+                  </h3>
+                  <small id="discount">50%</small>
+                </div>
+                <small id="old-price">
+                  <del>R$250.00</del>
+                </small>
+              </div>
+              <div class="products-infor-btns d-flex py-3">
+                <div>
+                    <div class="qty-btn" type="button" value="" onclick="remove(1)">
+                      <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="12"
+                      height="4"
+                    >
+                      <defs>
+                        <path
+                          d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
+                          id="a"
+                        />
+                      </defs>
+                      <use
+                        id="color-icon-qyt"
+                        fill="#FF7E1B"
+                        fill-rule="nonzero"
+                        xlink:href="#a"
+                      />
+                    </svg>
+                    </div>
+                  <span id="qtd1">0</span>
+                    <div class="qty-btn"  type="button" value="+" onclick="adiciona(1)">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="12"
+                        height="12"
+                      >
+                        <defs>
+                          <path
+                            d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
+                            id="b"
+                          />
+                        </defs>
+                        <use
+                          id="color-icon-qyt"
+                          fill="#FF7E1B"
+                          fill-rule="nonzero"
+                          xlink:href="#b"
+                        />
+                      </svg>
+                    </div>
+                </div>
+                <button
+                  class="qty-btn mx-3"
+                  id="add-to-cart" onclick="btnAddCart()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="20"
+                  >
+                    <path
+                      id="cart-btn"
+                      d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                      fill="#69707D"
+                      fill-rule="nonzero"
+                    />
+                  </svg>
+                  <span>Adicionar ao carrinho</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!--main carousel-->
+      <div class="carousel-container">
+        <div
+          class="
+            d-flex
+            flex-column
+            justify-content-center
+            align-items-center
+            w-100
+          "
+        >
+          <div
+            class="icon-close-container d-flex justify-content-end py-4"
+            onclick="closeCarousel()"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15">
+              <path
+                id="icon-close"
+                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                fill="#69707D"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div
+            id="carouselExampleControlsNoTouching"
+            class="carousel slide"
+            data-bs-touch="false"
+            data-bs-interval="false"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="/Frontend/images/image-product-1.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="/Frontend/images/image-product-2.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="/Frontend/images/image-product-3.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="/Frontend/images/image-product-4.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="prev"
+            >
+              <div>
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden"></span>
+              </div>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="next"
+            >
+              <div>
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--footer-->
+      <footer>
+        <div class="attribution">
+          Desafio de
+          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+            >Frontend Mentor</a
+          >. codificado por
+          <a href="https://www.instagram.com/sueniasaan/" target="_blank"
+            >@sueniasaan</a
+          >.
+        </div>
+      </footer>
+    </div>
+    <!--Bootstrap-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/backend/products.js"></script>
+    <script src="/Frontend/js/main.js"></script>
+    <script src="/Frontend/js/header.js"></script>
+  </body>
+</html>
